@@ -1,25 +1,26 @@
 const express = require('express')
 const app = express();
+const route = express.Router()
+const reqFilter = require('./middle');
 
-const reqFilter =(req,res,next)=> {
-if(!req.query.age){
-    res.send("Please provide age")
-}else if(req.query.age<18)
-{
- res.send("you are underage to use this website")
+ // app.use(reqFilter);    // To apply the route in all the links
 
-}else{
-    next();
-}
-}
+route.use(reqFilter);
 
-app.use(reqFilter);
+// app.get('/', reqFilter, (req,res) => {      // To apply the middleware in perticular route.
+//     res.send('Welcome to the home page')
+// });
 
-app.get('/', (req,res) => {
-    res.send('Welcome to the home page')
-});
 app.get('/users', (req,res) => {
     res.send('Welcome to the users page')
 });
+route.get('/about', (req,res) => {
+    res.send('Welcome to the about page')
+});
+route.get('/contact', (req,res) => {
+    res.send('Welcome to the contact page')
+});
+
+app.use('/',route);
 
 app.listen(5000); 

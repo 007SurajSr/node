@@ -1,0 +1,10 @@
+Hi, I am the new file which just got generated now
+
+mongoDB - crud
+db.product.insertOne({name:'Samsung',model:"s21 5g",price:'30000'})
+
+db.product.find()
+
+db.product.updateOne({name:"Samsung"},{$set:{name:'Samsung Galaxy'}})
+
+db.todo.deleteOne({brand:"this"})
