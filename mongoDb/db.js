@@ -4,11 +4,11 @@ const newData = 'videos'
  
 const cliend = new MongoClient(url);
 
-async function getData() {
+async function connect() {
     let result = await cliend.connect();
     let db = result.db(newData);
-    let collection = db.collection('product');
-    let response = await collection.find({}).toArray();
-    console.log(response);
+   return db.collection('product');
+   
 }
-getData();
+
+module.exports = connect;   // do not add '()' while export
