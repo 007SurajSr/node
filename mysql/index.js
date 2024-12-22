@@ -5,18 +5,19 @@ const app = express();
 app.use(express.json());
 
 app.get('/',(req, resp)=>{
-    con.query("select * from users", (err, result) => {
+    con.query("select * from users2", (err, result) => {
         if(err){
-            resp.send("error")
+            resp.send("Connected successfully")
         }else{
             resp.send(result);
         }
     })
    })
 
- app.post('/insert', (req,resp)=> {
+ app.post('/insert', (req,resp)=> { 
     const data =  req.body;
-    con.query('INSERT INTO users SET  ?' , data, (error, result, fields) => {
+    //const data = {name: "Peter Parker", email: "joe2@gmail.com"} ;
+    con.query("INSERT INTO users2 SET ?" , data, (error, result, fields) => {
         if (error) throw error;
         console.log(result);
         resp.send(result)
@@ -24,8 +25,8 @@ app.get('/',(req, resp)=>{
 })
 
 app.put('/update/:id', (req,resp)=> {
-    const data = [req.body.name, req.body.age, req.params.id];
-    con.query("UPDATE users SET name = ?, age = ? where user_id = ?", data,(error, result,fields)=> {
+    const data = [req.body.name, req.body.email, req.params.id];
+    con.query("UPDATE users2 SET name = ?, email = ? where id = ?", data,(error, result,fields)=> {
          if (error) throw error;
          console.log(result);
          resp.send(result)
@@ -34,7 +35,7 @@ app.put('/update/:id', (req,resp)=> {
 
 app.delete('/delete/:id', (req, resp)=>{
     const userID = req.params.id;
-    con.query("DELETE FROM users WHERE user_id = ?", [userID],(error, result, fields ) =>{
+    con.query("DELETE FROM users2 WHERE id = ?", [userID],(error, result, fields ) =>{
         if(error) throw error;
         console.log(result);
         resp.send(result);

@@ -14,8 +14,8 @@ var b = 0;
 
 let promos = new Promise((resolve, reject)=>{
     setTimeout(() => {
-        resolve (50);
-     }, 5000 );
+        resolve (40);
+     }, 1000 );
 })
 
 promos.then((data) =>{
