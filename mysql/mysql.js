@@ -14,3 +14,5 @@ con.connect((err)=> {
 })
 
 module.exports = con;
+
+// http://localhost/phpmyadmin/
